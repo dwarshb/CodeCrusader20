@@ -37,7 +37,7 @@ public class UserList extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
         foodlist = (RecyclerView)view.findViewById(R.id.itemlist);
-        adapter = new ItemAdapter(getContext(),items,0);
+        adapter = new ItemAdapter(getContext(),items);
         foodlist.setAdapter(adapter);
         items.clear();
         //RetroFit Initialize

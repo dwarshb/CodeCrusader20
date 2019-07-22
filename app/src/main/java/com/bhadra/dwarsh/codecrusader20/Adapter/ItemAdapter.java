@@ -1,8 +1,6 @@
 package com.bhadra.dwarsh.codecrusader20.Adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
@@ -26,13 +24,11 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
 
     Context context;
     ArrayList<Item> itemList;
-    int id;
     public ItemAdapter()
     {}
-    public ItemAdapter(Context context, ArrayList<Item> itemList, int id) {
+    public ItemAdapter(Context context, ArrayList<Item> itemList) {
         this.context = context;
         this.itemList = itemList;
-        this.id = id;
     }
 
     @Override
@@ -74,26 +70,15 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             itemView.findViewById(R.id.itemlayout).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (id == 0) {
+                    if (item.getAddress()!=null) {
                         address = item.getAddress().getStreet() + "," + item.getAddress().getSuite() + "," + item.getAddress().getCity() + "," + item.getAddress().getZipcode();
                         Log.e("Error", address);
                         Intent intent = new Intent(context, DetailScreen.class);
                         intent.putExtra("ADDRESS", address);
                         intent.putExtra("POSITION", item.getAddress().getGeo().getLat() + "," + item.getAddress().getGeo().getLng());
                         context.startActivity(intent);
-                    } else {
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-                        dialog.setTitle(item.getUsername());
-                        dialog.setMessage("ID: " + item.getId() + "\n" + "EMAIL-ID: " + item.getEmail());
-                        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.dismiss();
-                            }
-                        }).create().show();
                     }
                 }
-
             });
             for (int i=0;i<mydb.getAllFav().size();i++) {
                 if (mydb.getAllFav().get(i).getUsername().equals(item.getUsername())) {

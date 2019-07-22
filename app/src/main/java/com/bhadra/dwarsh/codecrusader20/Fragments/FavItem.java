@@ -30,7 +30,7 @@ public class FavItem extends Fragment {
         View view = inflater.inflate(R.layout.fragment_layout, container, false);
         foodlist = (RecyclerView)view.findViewById(R.id.itemlist);
         DBHelper mydb = new DBHelper(getContext());
-        adapter = new ItemAdapter(getContext(),mydb.getAllFav(),1);
+        adapter = new ItemAdapter(getContext(),mydb.getAllFav());
         foodlist.setAdapter(adapter);
         return view;
     }
